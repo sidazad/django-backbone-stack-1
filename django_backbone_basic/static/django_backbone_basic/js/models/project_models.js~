@@ -1,0 +1,22 @@
+define(["jquery", "backbone"],
+    function($, Backbone) {
+        var Project = TastypieModel.extend({
+            url:'project/',
+            // Model Constructor
+            initialize: function() {
+                alert("Project.init");
+            },
+            // Default values for all of the Model attributes
+            defaults: {
+
+            },
+            // Gets called automatically by Backbone when the set and/or save methods are called
+            validate: function(attrs) {
+                alert("Project.validate");
+            }
+        });
+        // Returns the Model class
+        return Project;
+    }
+);
+

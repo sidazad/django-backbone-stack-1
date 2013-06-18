@@ -1,0 +1,78 @@
+Using a Django Stack with Backbone.js, Marionette and Client-side templates
+===========================================================================
+
+Summary
+-------
+
+The objective of this post is to provide a tutorial for those wishing to use Django as a server side framework while using Backbone.js as a client-side framework, as well as to point out the differences between using a Django/Backbone/Client-side-templates stack with a traditional Django Server with server templates without a JavaScript framework. I have tried to cover various facets of a simple Login/Signup application.
+
+In the past I have written all client side code in JavaScript without using a framework such as Backbone.js. In exploring the use of Backbone.js with Django my objectives are as follows:
+
+
+What this post will not cover
+-----------------------------
+
+- Detailed tutorial on Backbone or Marionette. There are references for these.
+
+
+Objectives:
+-----------
+
+- Simplicity of the JavaScript framework
+- Ease of switching between client-side and server-side rendering/templating
+- Stable supporting plugins
+
+
+Choices
+-------
+
+In this section I will go over some basic choices of plugins and frameworks that I have made.
+
+- Backbone.js: I chose to go with Backbone as it seemed to be the most malleable and simple framework as well as has a widespread adoption. The other choices were AngularJS and ember.js. I have never used either of those so my decision is based mostly on stackoverflow discussions and Blog Posts.
+
+- Marionette: There are many extensions to Backbone but Derick Bailey's Marionette seems to be the most full and well-supported one. The components I am using from Marionette are:
+
+1. The "vent" object
+2. Views, such as ItemView
+
+- require.js: For dependency management and modularization.
+
+- text.js: plugin for requirejs to easily upload templates as plain text. If this were missing we did have to do an explicit $.get() to get the templates. This nicely integrates with require.js.
+
+
+Workflow
+--------
+
+- Hit index. Django gets request for index.html which embeds a call to main.js
+- main.js pulls in app.js which creates and returns a Marionette app object, the start() method of which is called in main.js
+- app.js initializes a new LandingView defined in landing.js
+- LandingView
+    - Tied to a template landing.mustache.html
+    - Contains loginView and signupView regions
+
+
+Questions
+---------
+
+- How would I change to using server side templates?
+
+- Why do I need Marionette?
+
+- 
+
+
+
+
+
+TODO:
+
+- URLS not changing to have # so refreshing always leads back to home page even if user logged in
+- TastyPie
+
+
+
+
+- 
+
+
+ 

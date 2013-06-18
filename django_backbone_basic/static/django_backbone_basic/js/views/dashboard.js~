@@ -1,0 +1,86 @@
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'marionette',
+    'vent',
+    'text',
+    'mustache',
+    'marionette_mustache',
+    'views/dashboard_menu_view',
+    'text!/templates/dashboard.mustache',
+    'text!/templates/notes_list.mustache',
+    'modules/note_modules',
+], 
+function($, _, Backbone, Marionette,vent,t,Mustache,MM,DashboardMenuView,/*NotesListView,*/
+dashboardTemplate,notesListTemplate,NoteModules) {
+
+    var NoteView = Backbone.Marionette.ItemView.extend({
+        template: notesListTemplate,
+        initialize : function () {
+            console.log('itemviewrender');
+        },
+    });
+
+
+    var NotesListView = Marionette.CollectionView.extend({
+        itemView:NoteView,
+        initialize: function () {
+            console.log("noteslistview:init:"+this.collection);
+            /*var note=new NoteModules.NoteModel();
+            note.save({title:"A note"});*/
+            this.collection.fetch();
+        },
+        events:{
+
+        },
+        onRender: function() {
+        },
+    });
+
+    /*var notes = [
+        {
+            username: "dbailey",
+            fullname: "Derick Bailey"
+        },
+        {
+            username: "jbob",
+            fullname: "Joe Bob"
+        },
+        {
+            username: "fbar",
+            fullname: "Foo Bar"
+        }
+    ];*/
+
+
+    var DashboardView = Marionette.Layout.extend({
+        template:dashboardTemplate,
+        regions:{
+            dashboardMenuRegion:'#dashboardMenuRegion',
+            notesListRegion:'#notesListRegion',
+            activityFeedRegion:'#activityFeedRegion',
+        },
+        initialize: function () {
+            this.dashboardMenuView=new DashboardMenuView();
+            //this.notesListView=new NotesListView({collection:new Backbone.Collection(notes)});
+            console.log(NoteModules);
+            this.notesListView=new NotesListView({collection:new NoteModules.NoteCollection()});    
+            console.log("initialize");
+            console.log(this.dashboardMenuView);
+            console.log(this.notesListView);
+        },
+
+        onRender: function() {
+            this.dashboardMenuRegion.show(this.dashboardMenuView);
+            this.notesListRegion.show(this.notesListView);
+            console.log("onRender");
+            console.log(this.dashboardMenuView);
+            console.log(this.notesListView);
+        }
+    });
+    // Our module now returns our view
+    return DashboardView;
+});
+
+

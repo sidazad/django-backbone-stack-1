@@ -1,0 +1,39 @@
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'marionette',
+    'vent',
+    'text',
+    'mustache',
+    'marionette_mustache',
+    'text!/templates/notes_list.mustache',
+], 
+function($, _, Backbone, Marionette,vent,t,Mustache,MM,notesListTemplate) {
+
+    var NoteView = Backbone.Marionette.ItemView.extend({
+        template: notesListTemplate,
+
+        initialize : function () {
+            console.log('itemviewrender');
+        },
+    });
+
+    var NotesListView = Marionette.CollectionView.extend({
+        //template:notesListTemplate,
+        itemView:NoteView,
+        initialize: function () {
+            console.log("noteslistview:init:"+this.collection);
+            this.collection.fetch();
+        },
+        events:{
+
+        },
+
+        onRender: function() {
+        },
+    });
+    return NotesListView;
+});
+
+

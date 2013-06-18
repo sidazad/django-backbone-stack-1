@@ -1,0 +1,38 @@
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'marionette',
+    'vent',
+    'text',
+    'mustache',
+    'marionette_mustache',
+    'text!/templates/new_note_dialog.mustache',
+    'modules/note_modules',
+], 
+function($, _, Backbone, Marionette,vent,t,Mustache,MM,newNoteDialogTemplate,NoteModules) {
+    var NewNoteDialogView = Marionette.ItemView.extend({
+        template:newNoteDialogTemplate,
+        ui: {
+            title: "#newNoteTitle",
+            text: "#newNoteText",
+        },
+        events:{
+            'click #saveNote':'saveNote',
+        },
+        saveNote:function() {
+            console.log("saveNote");
+            console.log(this.ui.title.val());
+            console.log(this.ui.text.val());
+            var note=new NoteModules.NoteModel();
+            note.save({title:this.ui.title.val(),text:this.ui.text.val()});
+            $.modal.close();
+            vent.trigger("show:dashboard");
+            // @todo  trigger model fetch
+        }
+    });
+    // Our module now returns our view
+    return NewNoteDialogView;
+});
+
+

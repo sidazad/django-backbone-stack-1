@@ -1,0 +1,21 @@
+define([
+  'jquery',
+  'marionette',
+  'vent',
+],  
+function($,Marionette,vent){
+
+
+    return {
+        showLanding : function(param) {
+            console.log("controller:showLanding");
+            vent.trigger("show:landing");
+        },
+        showDashboard: function(param) {
+            console.log("controller:showDashboard");
+            vent.trigger("show:dashboard");
+        },
+                
+    };
+});
+

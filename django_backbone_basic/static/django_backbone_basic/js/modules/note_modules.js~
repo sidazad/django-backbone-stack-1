@@ -1,0 +1,13 @@
+define([
+    'jquery',
+    'backbone',
+    'marionette',
+    '../models/note_model',
+    '../collections/note_collection',
+], 
+function($, Backbone, Marionette,NoteModel,NoteCollection) {
+    return {
+        NoteModel:NoteModel,
+        NoteCollection:NoteCollection,
+    };
+});

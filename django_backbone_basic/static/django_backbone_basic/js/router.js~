@@ -1,0 +1,17 @@
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'marionette',
+  'text',
+],  
+function($, _, Backbone, Marionette,t,LandingView,DashboardView){
+    return Marionette.AppRouter.extend({
+        appRoutes:{
+            '':'showLanding',
+            'landing': 'showLanding',
+            'dashboard':'showDashboard',
+        }
+      });
+});
+

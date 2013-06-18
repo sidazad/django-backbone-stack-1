@@ -1,0 +1,12 @@
+define([
+    'jquery',
+    'backbone',
+    'marionette',
+], 
+function($, Backbone, Marionette) {
+    var NoteModel = Backbone.Model.extend({
+        urlRoot: '/api/v1/notes'
+    });
+    return NoteModel;
+});
+
